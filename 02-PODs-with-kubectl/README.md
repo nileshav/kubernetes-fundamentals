@@ -164,6 +164,14 @@ kubectl logs -f my-first-pod
 kubectl exec -it <pod-name> -- /bin/bash
 kubectl exec -it my-first-pod -- /bin/bash
 
+**Important**: If you are receving any error then it might be possible Windows when using Git Bash with kubectl exec — Git Bash rewrites paths and messes up how the shell is passed into the container. It tries to run the shell on your host instead of inside the container. To fix this, run the same command in a different terminal, such as:
+PowerShell:
+kubectl exec -it my-first-pod -- /bin/bash
+Command Prompt (CMD):
+kubectl exec -it my-first-pod -- /bin/sh
+WORKAROUND by disabling path conversion for that command in git-bash itself:
+MSYS_NO_PATHCONV=1 kubectl exec -it my-first-pod -- /bin/bash
+
 # Execute some commands in Nginx container
 ls
 cd /usr/share/nginx/html
